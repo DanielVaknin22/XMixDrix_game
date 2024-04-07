@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Text, Alert } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Text, Alert, ImageBackground } from 'react-native';
 
 const emptyBoard = Array.from(Array(3), () => Array(3).fill(''));
 
 const X_IMAGE = require('./assets/x_image.png');
 const O_IMAGE = require('./assets/o_image.png');
+const Background_Image = require('./assets/background.png');
 
 const App = () => {
   const [board, setBoard] = useState<string[][]>(emptyBoard);
@@ -56,7 +57,9 @@ const App = () => {
   };
 
   return (
+<ImageBackground source={Background_Image} style={styles.container} resizeMode="contain">
     <View style={styles.container}>
+    <Text style={styles.title}>{'X Mix Drix Game'}</Text>
       <View style={styles.board}>
         {board.map((row, rowIndex) => (
           <View key={rowIndex} style={styles.row}>
@@ -71,6 +74,7 @@ const App = () => {
       </View>
       <Text style={styles.playerText}>{`Player ${player}'s turn`}</Text>
     </View>
+    </ImageBackground>
   );
 };
 
@@ -79,11 +83,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    // backgroundColor: '#000',
   },
   board: {
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#fff',
     marginBottom: 20,
   },
   row: {
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#fff',
   },
   image: {
     width: 50,
@@ -104,7 +108,13 @@ const styles = StyleSheet.create({
   playerText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',    
   },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
+  }
 });
 
 export default App;
